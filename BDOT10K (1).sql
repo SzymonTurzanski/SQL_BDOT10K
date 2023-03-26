@@ -186,24 +186,6 @@ CREATE INDEX IDX_M_OT_ADJA_A_RR ON M_OT_OIPR_P (RR);
 
 
 
-CREATE OR REPLACE FUNCTION DATAAUTOR()
-    RETURNS trigger AS
-$BODY$
-    BEGIN
-    NEW.x_uzytkownik := current_user;
-    NEW.x_dataUtworzenia := current_date;
-    RETURN NEW;
-    END;
-$BODY$
-    LANGUAGE plpgsql VOLATILE
-    COST 100;
-    
-CREATE TRIGGER TRG_OT_OIPR_P
-    AFTER INSERT
-    ON OT_OIPR_P
-    FOR EACH ROW
-    EXECUTE PROCEDURE DATAAUTOR();
-
 
 
 
